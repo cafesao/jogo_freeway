@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Atari;
+  src: url('../font/Atari.ttf');
+}
+
 #screen {
   image-rendering: pixelated;
   image-rendering: crisp-edges;
