@@ -1,4 +1,4 @@
-import { pincel, canvas, objetos } from './infoJogo.js'
+import { pincel, objetos, jogador } from './infoJogo.js'
 
 export function desenharFundo() {
   function desenhaListraBranca(y) {
@@ -22,6 +22,13 @@ export function desenharFundo() {
     pincel.fillRect(0, y + 5, 400, 20)
   }
 
+  function desenhaPontos() {
+    pincel.font = '17pt Atari'
+    pincel.fillStyle = 'rgba(200,200,200,0.9)'
+    pincel.fillText(`Pontos: ${jogador.pontos}`, 35, 22)
+    pincel.fillText(`Mortes: ${jogador.mortes}`, 260, 22)
+  }
+
   function desenhaRua() {
     desenhaCalcada(0)
     desenhaListraBranca(70)
@@ -35,6 +42,7 @@ export function desenharFundo() {
   pincel.fillStyle = 'grey'
   pincel.fillRect(0, 0, 400, 400)
   desenhaRua()
+  desenhaPontos()
 }
 
 export function desenhaPersonagem(x, y) {
@@ -54,20 +62,19 @@ export async function desenhaImagens(
   carroImage6,
   personagem,
 ) {
-  pincel.translate(canvas.width / 2, canvas.height / 2)
-  pincel.rotate((90 * Math.PI) / 180)
+  function limpaTela() {
+    pincel.clearRect(0, 0, 400, 400)
+    desenharFundo()
+  }
+
+  limpaTela()
+
   pincel.drawImage(carroImage1, ...objetos.carro1)
-  pincel.rotate((180 * Math.PI) / 180)
   pincel.drawImage(carroImage2, ...objetos.carro2)
-  pincel.rotate((180 * Math.PI) / 180)
   pincel.drawImage(carroImage3, ...objetos.carro3)
-  pincel.rotate((180 * Math.PI) / 180)
   pincel.drawImage(carroImage4, ...objetos.carro4)
-  pincel.rotate((180 * Math.PI) / 180)
   pincel.drawImage(carroImage5, ...objetos.carro5)
-  pincel.rotate((180 * Math.PI) / 180)
   pincel.drawImage(carroImage6, ...objetos.carro6)
-  pincel.rotate((90 * Math.PI) / 180)
   pincel.drawImage(personagem, ...objetos.personagem)
 }
 
